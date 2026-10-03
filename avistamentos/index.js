@@ -28,6 +28,12 @@ app.post('/avistamentos', (req, res) => {
     return res.status(201).json(avistamento);
 })
 
+app.post('/eventos', (req, res) => {
+    const evento = req.body
+    console.log(evento)
+    res.status(200).send({msg: "ok"})
+})
+
 app.listen(PORT, () => {
     console.log(`Avistamentos. Porta ${PORT}.`);
 })
