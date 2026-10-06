@@ -15,7 +15,7 @@ app.post('/avistamentos/:id/relatos', async (req, res) => {
         id: uuidv4(),
         texto: texto,
         confirmacoes: 0,
-        relatosPorAvistamentoId: req.params.id
+        avistamentoId: req.params.id
     }
 
     await axios.post('http://localhost:10000/eventos', {
