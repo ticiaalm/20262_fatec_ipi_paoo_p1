@@ -7,15 +7,21 @@ app.use(express.json())
 const PORT = 4100
 const relatosPorAvistamentoId = {}
 
-app.post('/avistamentos/:id/relatos', (req, res) => {
+app.post('/avistamentos/:id/relatos', async (req, res) => {
     const { texto } = req.body
     const id = req.params.id
 
     const relato = {
         id: uuidv4(),
         texto: texto,
-        confirmacoes: 0
+        confirmacoes: 0,
+        relatosPorAvistamentoId: req.params.id
     }
+
+    await axios.post('http://localhost:10000/eventos', {
+        tipo: 'RelatoCriado',
+        dados: relato
+    })
 
     const relatosDoAvistamento = relatosPorAvistamentoId[req.params.id] || []
     relatosDoAvistamento.push(relato)
